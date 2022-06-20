@@ -1,6 +1,7 @@
 .progressPage_container {
   display: flex;
   justify-content: space-around;
+  
 }
 
 .progressPage_container .MuiSvgIcon-root {
@@ -16,12 +17,13 @@
   padding: 5px 20px !important;
   width: 100% !important;
   padding-bottom: 40px !important;
+  overflow-x: auto !important;
 }
 
 .candidate_heading {
   text-align: center;
   margin-top: 20% !important;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-weight: 500 !important;
 }
 .personal {

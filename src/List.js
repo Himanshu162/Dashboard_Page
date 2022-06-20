@@ -12,7 +12,11 @@ import data from "././data.json";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
+
 const List = () => {
+  
+ 
+
   let navigate = useNavigate();
   const goToProgressPage = (data) => {
     Cookies.set("id", data.id);
@@ -52,6 +56,7 @@ const List = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
     </div>
   );
 };

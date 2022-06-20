@@ -46,7 +46,6 @@ const StepForm = () => {
     let path = "/list";
     navigate(path);
   };
-  
 
   return (
     <div className="stepform_container">
