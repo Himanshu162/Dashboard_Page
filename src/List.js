@@ -11,12 +11,9 @@ import "./Assets/CSS/List.css";
 import data from "././data.json";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-
+// import ProgressPage from "./ProgressPage";
 
 const List = () => {
-  
- 
-
   let navigate = useNavigate();
   const goToProgressPage = (data) => {
     Cookies.set("id", data.id);
@@ -45,6 +42,12 @@ const List = () => {
                     className="tableCell_"
                     onClick={() => goToProgressPage(data)}
                     style={{ cursor: "pointer" }}
+                    // expandable = {{
+                    //   expandedRowRender:() =>(
+                    //     <ProgressPage />
+                    //   ),
+                    //   rowExpandable:() => <ProgressPage/> !== "Not Expandable",
+                    // }}
                   >
                     {id + 1}
                   </TableCell>
@@ -56,7 +59,6 @@ const List = () => {
           </TableBody>
         </Table>
       </TableContainer>
-
     </div>
   );
 };

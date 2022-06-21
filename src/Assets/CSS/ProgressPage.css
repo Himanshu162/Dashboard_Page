@@ -1,7 +1,6 @@
 .progressPage_container {
   display: flex;
   justify-content: space-around;
-  
 }
 
 .progressPage_container .MuiSvgIcon-root {
@@ -30,4 +29,33 @@
   font-size: 20px !important;
   padding-bottom: 8px !important;
   font-weight: 400 !important;
+}
+
+.progressbar {
+  position: relative;
+  justify-content: space-between !important;
+}
+.progressbar::before {
+  content: "";
+  position: absolute;
+  top: 60%;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 100%;
+  background-color: #dcdcdc;
+  z-index: -1 !important;
+}
+
+.Progress-step {
+  width: 40px;
+  height: 40px;
+  background-color: #dcdcdc;
+  border-radius: 50%;
+}
+
+.progressCount {
+  justify-content: center !important;
+  position: relative;
+  display: flex;
+  padding: 10px;
 }
