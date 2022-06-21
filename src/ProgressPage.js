@@ -51,7 +51,7 @@ const ProgressPage = () => {
         <h1 className="candidate_heading">Candidate Status</h1>
         <h3 className="personal">Personal id: {id}</h3>
 
-        <Slider {...settings}>
+        {/* <Slider {...settings}> */}
           {steps.map((label, i) => (
             <div className="progressbar">
               <div className="Progress-step">
@@ -60,7 +60,7 @@ const ProgressPage = () => {
               </div>
             </div>
           ))}
-        </Slider>
+        {/* </Slider> */}
       </Grid>
     </Grid>
   );

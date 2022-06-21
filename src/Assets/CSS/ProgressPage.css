@@ -34,6 +34,7 @@
 .progressbar {
   position: relative;
   justify-content: space-between !important;
+
 }
 .progressbar::before {
   content: "";
