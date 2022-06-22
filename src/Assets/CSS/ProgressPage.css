@@ -18,16 +18,9 @@
   padding-bottom: 40px !important;
   overflow-x: auto !important;
 }
-
-.candidate_heading {
-  text-align: center;
-  margin-top: 20% !important;
-  font-family: "Times New Roman", Times, serif;
-  font-weight: 500 !important;
-}
 .personal {
   font-size: 20px !important;
-  padding-bottom: 8px !important;
+  padding-bottom: 5px !important;
   font-weight: 400 !important;
 }
 
@@ -36,7 +29,7 @@
   justify-content: space-between !important;
 
 }
-.progressbar::before {
+/* .progressbar::before {
   content: "";
   position: absolute;
   top: 60%;
@@ -45,7 +38,7 @@
   width: 100%;
   background-color: #dcdcdc;
   z-index: -1 !important;
-}
+} */
 
 .Progress-step {
   width: 40px;

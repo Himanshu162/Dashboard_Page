@@ -1,70 +1,4 @@
-// import {
-//   Table,
-//   TableContainer,
-//   TableHead,
-//   TableRow,
-//   TableCell,
-//   TableBody,
-// } from "@mui/material";
-// import React, { useState } from "react";
-// import "./Assets/CSS/List.css";
-// import data from "././data.json";
-// import { useNavigate } from "react-router-dom";
-// import Cookies from "js-cookie";
-// // import ProgressPage from "./ProgressPage";
-
-// const List = () => {
-//   let navigate = useNavigate();
-//   const goToProgressPage = (data) => {
-//     Cookies.set("id", data.id);
-//     let path = "/progress/";
-//     navigate(path);
-//   };
-
-//   const [isExpand, setExpand] = useState(false);
-
-//   return (
-//     <div className="list_container">
-//       <h1 className="heading_list">Running Process List</h1>
-//       <TableContainer
-//         style={{ maxWidth: "100%", justifyContent: "space-around" }}
-//       >
-//         <Table>
-//           <TableHead>
-//             <TableRow>
-//               <TableCell className="tableCell">Personal Id</TableCell>
-//               <TableCell className="tableCell">Time</TableCell>
-//               <TableCell className="tableCell">Status</TableCell>
-//             </TableRow>
-//           </TableHead>
-//           <TableBody>
-//             {data.map((data, id) => {
-//               return (
-//                 <TableRow onClick={() => setExpand(!isExpand)}>
-
-//                   <TableCell
-//                     className="tableCell_"
-//                     // onClick={() => goToProgressPage(data)}
-//                     style={{ cursor: "pointer" }}
-
-//                   >
-//                     {id + 1}
-//                   </TableCell>
-//                   <TableCell className="tableCell_">{data.time}</TableCell>
-//                   <TableCell className="tableCell_">{data.status}</TableCell>
-//                 </TableRow>
-//               );
-//             })}
-//           </TableBody>
-//         </Table>
-//       </TableContainer>
-//     </div>
-//   );
-// };
-
-// export default List;
-
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -72,14 +6,12 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import IconButton from "@material-ui/core/IconButton";
+import { IconButton } from "@mui/material";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import data from "./data.json";
 import ProgressPage from "./ProgressPage";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
-
 import "./Assets/CSS/List.css";
 
 const useStyles = makeStyles({
@@ -93,7 +25,7 @@ const useStyles = makeStyles({
 });
 
 const ExpandableTableRow = ({ children, expandComponent, ...otherProps }) => {
-  const [isExpanded, setIsExpanded] = React.useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <>
@@ -116,12 +48,7 @@ const ExpandableTableRow = ({ children, expandComponent, ...otherProps }) => {
 };
 
 const List = () => {
-  let navigate = useNavigate();
-  const goToProgressPage = (data) => {
-    Cookies.set("id", data.id);
-    let path = "/progress/";
-    navigate(path);
-  };
+  Cookies.set("id", data.id);
   const classes = useStyles();
 
   return (
@@ -137,15 +64,16 @@ const List = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((data, id) => (
+          {data.map((data, index) => (
             <ExpandableTableRow
+              key={index}
               expandComponent={
-                <TableCell colSpan="5" onClick={() => goToProgressPage(data)}>
+                <TableCell colSpan="5">
                   <ProgressPage />
                 </TableCell>
               }
             >
-              <TableCell align="center">{id + 1}</TableCell>
+              <TableCell align="center">{index + 1}</TableCell>
               <TableCell align="center">{data.time}</TableCell>
               <TableCell align="center">{data.status}</TableCell>
             </ExpandableTableRow>
@@ -154,5 +82,5 @@ const List = () => {
       </Table>
     </Paper>
   );
-}
+};
 export default List;
