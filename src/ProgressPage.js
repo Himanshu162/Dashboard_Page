@@ -31,6 +31,14 @@ const steps = [
   "signing",
   "approved",
   "reject",
+  "approved",
+  "created",
+  "sent",
+  "approved",
+  "pending",
+  "reject",
+  "process",
+  
 ];
 
 const ProgressPage = () => {
@@ -38,7 +46,7 @@ const ProgressPage = () => {
 
   return (
     <Grid container className="progressPage_container">
-      <Grid className="grid" xs={6} item>
+      <Grid className="grid" xs={12} item>
 
         <h3 className="personal">Personal id: {id}</h3>
 

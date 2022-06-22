@@ -1,6 +1,7 @@
 .progressPage_container {
   display: flex;
   justify-content: space-around;
+  margin-top: -10px;
 }
 
 .progressPage_container .MuiSvgIcon-root {
@@ -20,25 +21,29 @@
 }
 .personal {
   font-size: 20px !important;
-  padding-bottom: 5px !important;
   font-weight: 400 !important;
+  margin-top: 1px;
+  padding-bottom: -8px;
 }
 
 .progressbar {
   position: relative;
-  justify-content: space-between !important;
+  flex-direction: row !important;
+  display: inline-block;
+  margin-left: 35px !important;
 
 }
-/* .progressbar::before {
+
+.progressbar::before {
   content: "";
+  display: block;
+  width: 100px;
+  height: 2px;
+  background: #dcdcdc;
   position: absolute;
+  left: 0;
   top: 60%;
-  transform: translateY(-50%);
-  height: 4px;
-  width: 100%;
-  background-color: #dcdcdc;
-  z-index: -1 !important;
-} */
+}
 
 .Progress-step {
   width: 40px;

@@ -52,7 +52,7 @@ const List = () => {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.root}>
+    <Paper className={classes.root} style={{marginTop:"50px", boxShadow:"none"}}>
       <h1 className="heading_list">Candidate Status</h1>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
