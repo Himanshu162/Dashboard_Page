@@ -38,6 +38,7 @@ const steps = [
   "process",
   "signing",
   "approved",
+  
 ];
 
 const ProgressPage = () => {
