@@ -1,39 +1,21 @@
 .progressPage_container {
   display: flex;
   justify-content: space-around;
-  margin-top: -10px;
 }
 
-.progressPage_container .MuiSvgIcon-root {
-  height: 40px !important;
-  width: 40px !important;
-}
-
-.progressPage_container .MuiStepConnector-root {
-  margin-top: 8px !important;
-}
-.card_ {
-  justify-content: center !important;
-  padding: 5px 20px !important;
-  width: 100% !important;
-  padding-bottom: 40px !important;
-  overflow-x: auto !important;
-}
 .personal {
   font-size: 20px !important;
+  padding-bottom: 5px !important;
   font-weight: 400 !important;
-  margin-top: 1px;
-  padding-bottom: -8px;
 }
 
 .progressbar {
   position: relative;
+  justify-content: flex-start !important;
   flex-direction: row !important;
   display: inline-block;
-  margin-left: 35px !important;
-
+  margin-left: 35px;
 }
-
 .progressbar::before {
   content: "";
   display: block;

@@ -31,14 +31,13 @@ const steps = [
   "signing",
   "approved",
   "reject",
-  "approved",
-  "created",
   "sent",
   "approved",
   "pending",
   "reject",
   "process",
-  
+  "signing",
+  "approved",
 ];
 
 const ProgressPage = () => {
@@ -47,7 +46,6 @@ const ProgressPage = () => {
   return (
     <Grid container className="progressPage_container">
       <Grid className="grid" xs={12} item>
-
         <h3 className="personal">Personal id: {id}</h3>
 
         {steps.map((label, i) => (
