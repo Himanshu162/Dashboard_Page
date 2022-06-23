@@ -4,18 +4,27 @@
   text-align: center !important;
   color: rgba(34, 34, 34, 0.562);
   font-weight: 300 !important;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
 }
 .tableCell_ {
   text-align: center !important;
   color: #000000 !important;
   font-size: 16px !important;
- 
 }
 .heading_list {
   text-align: center !important;
   padding-top: 20px !important;
   padding-bottom: 10px !important;
   font-weight: 500 !important;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 35px !important;
+}
+.table_row {
+  font-weight: bold !important;
+  font-size: 20px !important;
+  font-family: "Times New Roman", Times, serif !important;
+}
+
+.table_col {
+  font-size: 20px;
 }

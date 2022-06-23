@@ -58,9 +58,9 @@ const List = () => {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell align="center">Id</TableCell>
-            <TableCell align="center">Time</TableCell>
-            <TableCell align="center">Status</TableCell>
+            <TableCell align="center" className= "table_row" >Id</TableCell>
+            <TableCell align="center" className= "table_row" >Time</TableCell>
+            <TableCell align="center" className= "table_row" >Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -73,9 +73,9 @@ const List = () => {
                 </TableCell>
               }
             >
-              <TableCell align="center">{index + 1}</TableCell>
-              <TableCell align="center">{data.time}</TableCell>
-              <TableCell align="center">{data.status}</TableCell>
+              <TableCell align="center"className= "table_col">{index + 1}</TableCell>
+              <TableCell align="center"className= "table_col">{data.time}</TableCell>
+              <TableCell align="center"className= "table_col">{data.status}</TableCell>
             </ExpandableTableRow>
           ))}
         </TableBody>

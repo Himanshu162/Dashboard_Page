@@ -28,8 +28,8 @@
 }
 
 .Progress-step {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   background-color: #dcdcdc;
   border-radius: 50%;
 }
@@ -38,5 +38,5 @@
   justify-content: center !important;
   position: relative;
   display: flex;
-  padding: 10px;
+  padding: 12px;
 }
