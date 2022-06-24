@@ -11,7 +11,6 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import data from "./data.json";
 import ProgressPage from "./ProgressPage";
-import Cookies from "js-cookie";
 import "./Assets/CSS/List.css";
 
 const useStyles = makeStyles({
@@ -48,7 +47,6 @@ const ExpandableTableRow = ({ children, expandComponent, ...otherProps }) => {
 };
 
 const List = () => {
-  Cookies.set("id", data.id);
   const classes = useStyles();
 
   return (
@@ -69,7 +67,7 @@ const List = () => {
               key={index}
               expandComponent={
                 <TableCell colSpan="5">
-                  <ProgressPage />
+                  <ProgressPage id={index + 1} />
                 </TableCell>
               }
             >

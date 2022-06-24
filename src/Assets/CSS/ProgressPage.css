@@ -10,13 +10,10 @@
 }
 
 .progressbar {
-  position: relative;
-  justify-content: flex-start !important;
-  flex-direction: row !important;
-  display: inline-block;
-  margin-left: 35px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
 }
-.progressbar::before {
+/* .progressbar::before {
   content: "";
   display: block;
   width: 100px;
@@ -25,18 +22,32 @@
   position: absolute;
   left: 0;
   top: 60%;
-}
-
+} */
+/* 
 .Progress-step {
-  width: 45px;
-  height: 45px;
-  background-color: #dcdcdc;
-  border-radius: 50%;
-}
+} */
 
 .progressCount {
   justify-content: center !important;
   position: relative;
   display: flex;
   padding: 12px;
+}
+
+.Progress_div {
+  display: flex;
+  align-items: center;
+  display: grid;
+  grid-template-columns: 45px 1fr;
+}
+
+.Progress_div > p {
+  padding: 12px 0;
+  background-color: #dcdcdc;
+  border-radius: 50%;
+}
+.Progress_div > div {
+  height: 2px;
+  width: 100%;
+  background-color: #dcdcdc;
 }
