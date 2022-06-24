@@ -35,8 +35,6 @@ const steps = [
   "pending",
   "reject",
   "process",
-  "signing",
-  "approved",
 ];
 
 const ProgressPage = ({ id }) => {
