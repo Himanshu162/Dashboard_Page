@@ -13,19 +13,6 @@
   display: grid;
   grid-template-columns: repeat(10, 1fr);
 }
-/* .progressbar::before {
-  content: "";
-  display: block;
-  width: 100px;
-  height: 2px;
-  background: #dcdcdc;
-  position: absolute;
-  left: 0;
-  top: 60%;
-} */
-/* 
-.Progress-step {
-} */
 
 .progressCount {
   justify-content: center !important;
