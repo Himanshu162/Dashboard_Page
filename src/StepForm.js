@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Assets/CSS/StepForm.css";
 import { Card, Grid, Divider } from "@mui/material";
 import { Doughnut } from "react-chartjs-2";
 import { useNavigate } from "react-router-dom";
-import Mockdata from "./data.json";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserData } from "./Redux/actions/action";
+import data from "./data.json";
 
 import {
   Chart,
@@ -19,7 +21,7 @@ const options = {
   rotation: -28.5 * Math.PI - (25 / 180) * Math.PI,
 };
 
-const data = {
+const data_1 = {
   datasets: [
     {
       data: [100],
@@ -40,12 +42,17 @@ const data1 = {
 };
 
 const StepForm = () => {
-  console.log("this is data", Mockdata.length)
   let navigate = useNavigate();
   const routeChange = () => {
     let path = "/list";
     navigate(path);
   };
+
+  const stepformdata = useSelector((state) => state.listData.userData);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUserData(data));
+  }, [dispatch]);
 
   return (
     <div className="stepform_container">
@@ -57,9 +64,9 @@ const StepForm = () => {
           <Divider style={{ marginBottom: "20px" }} />
           <div className="icons">
             <div className="main_div">
-              <div>{Mockdata.length}</div>
+              <div>{stepformdata.length}</div>
               <Doughnut
-                data={data}
+                data={data_1}
                 options={options}
                 style={{ height: "230px", width: "230px", cursor: "pointer" }}
                 onClick={routeChange}
