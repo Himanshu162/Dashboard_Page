@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,9 +9,11 @@ import Paper from "@material-ui/core/Paper";
 import { IconButton } from "@mui/material";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import data from "./data.json";
 import ProgressPage from "./ProgressPage";
 import "./Assets/CSS/List.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserData } from "./Redux/actions/action";
+import data from './data.json'
 
 const useStyles = makeStyles({
   root: {
@@ -22,6 +24,8 @@ const useStyles = makeStyles({
     minWidth: 550,
   },
 });
+
+
 
 const ExpandableTableRow = ({ children, expandComponent, ...otherProps }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -48,6 +52,14 @@ const ExpandableTableRow = ({ children, expandComponent, ...otherProps }) => {
 
 const List = () => {
   const classes = useStyles();
+  const userList = useSelector(
+    (state) => state.listData.userData
+  );
+  const dispatch = useDispatch();
+  console.log("This is List data", userList);
+  useEffect(()=> {
+    dispatch(getUserData(data))
+  }, [dispatch])
 
   return (
     <Paper className={classes.root} style={{marginTop:"50px", boxShadow:"none"}}>
@@ -62,7 +74,7 @@ const List = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((data, index) => (
+          {userList.map((data, index) => (
             <ExpandableTableRow
               key={index}
               expandComponent={
