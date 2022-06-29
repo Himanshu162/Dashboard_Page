@@ -10,10 +10,10 @@ import { IconButton } from "@mui/material";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ProgressPage from "./ProgressPage";
-import "./Assets/CSS/List.css";
+import "../Assets/CSS/List.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserData } from "./Redux/actions/action";
-import data from './data.json'
+import { getUserData } from "../Redux/actions/action";
+import data from "../data.json";
 
 const useStyles = makeStyles({
   root: {
@@ -24,8 +24,6 @@ const useStyles = makeStyles({
     minWidth: 550,
   },
 });
-
-
 
 const ExpandableTableRow = ({ children, expandComponent, ...otherProps }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -52,25 +50,32 @@ const ExpandableTableRow = ({ children, expandComponent, ...otherProps }) => {
 
 const List = () => {
   const classes = useStyles();
-  const userList = useSelector(
-    (state) => state.listData.userData
-  );
+  const userList = useSelector((state) => state.listData.userData);
   const dispatch = useDispatch();
   console.log("This is List data", userList);
-  useEffect(()=> {
-    dispatch(getUserData(data))
-  }, [dispatch])
+  useEffect(() => {
+    dispatch(getUserData(data));
+  }, [dispatch]);
 
   return (
-    <Paper className={classes.root} style={{marginTop:"50px", boxShadow:"none"}}>
+    <Paper
+      className={classes.root}
+      style={{ marginTop: "50px", boxShadow: "none" }}
+    >
       <h1 className="heading_list">Candidate Status</h1>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell align="center" className= "table_row" >Id</TableCell>
-            <TableCell align="center" className= "table_row" >Time</TableCell>
-            <TableCell align="center" className= "table_row" >Status</TableCell>
+            <TableCell align="center" className="table_row">
+              Id
+            </TableCell>
+            <TableCell align="center" className="table_row">
+              Time
+            </TableCell>
+            <TableCell align="center" className="table_row">
+              Status
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -83,9 +88,15 @@ const List = () => {
                 </TableCell>
               }
             >
-              <TableCell align="center"className= "table_col">{index + 1}</TableCell>
-              <TableCell align="center"className= "table_col">{data.time}</TableCell>
-              <TableCell align="center"className= "table_col">{data.status}</TableCell>
+              <TableCell align="center" className="table_col">
+                {index + 1}
+              </TableCell>
+              <TableCell align="center" className="table_col">
+                {data.time}
+              </TableCell>
+              <TableCell align="center" className="table_col">
+                {data.status}
+              </TableCell>
             </ExpandableTableRow>
           ))}
         </TableBody>

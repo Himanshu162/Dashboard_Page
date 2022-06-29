@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import "./Assets/CSS/StepForm.css";
+import "../Assets/CSS/StepForm.css";
 import { Card, Grid, Divider } from "@mui/material";
 import { Doughnut } from "react-chartjs-2";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserData } from "./Redux/actions/action";
-import data from "./data.json";
+import { getUserData } from "../Redux/actions/action";
+import data from "../data.json";
 
 import {
   Chart,

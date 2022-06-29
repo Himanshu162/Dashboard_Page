@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import React from "react";
-import "./Assets/CSS/ProgressPage.css";
+import "../Assets/CSS/ProgressPage.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
