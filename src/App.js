@@ -11,14 +11,17 @@ import Navbar from "./components/Navbar";
 function App() {
   return (
     <>
-    <ReactKeycloakProvider authClient={keycloak}>
-      <Navbar />
-    <Routes>
-      <Route path="/" element={<StepForm />} />
-      <Route path="/list" element={<List />} />
-      <Route path="/progress" element={<ProgressPage />} />
-    </Routes>
-    </ReactKeycloakProvider>
+      <ReactKeycloakProvider
+        authClient={keycloak}
+        initOptions={{ onLoad: "login-required" }}
+      >
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<StepForm />} />
+          <Route path="/list" element={<List />} />
+          <Route path="/progress" element={<ProgressPage />} />
+        </Routes>
+      </ReactKeycloakProvider>
     </>
   );
 }

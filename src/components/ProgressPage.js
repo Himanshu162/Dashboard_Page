@@ -1,63 +1,30 @@
 import { Grid } from "@mui/material";
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "../Assets/CSS/ProgressPage.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import axios from "axios"
+import axios from "axios";
 
-const steps = [
-  "created",
-  "sent",
-  "approved",
-  "pending",
-  "reject",
-  "process",
-  "signing",
-  "approved",
-  "created",
-  "sent",
-  "approved",
-  "pending",
-  "reject",
-  "process",
-  "signing",
-  "approved",
-  "created",
-  "sent",
-  "approved",
-  "pending",
-  "reject",
-  "process",
-  "signing",
-  "approved",
-  "reject",
-  "sent",
-  "approved",
-  "pending",
-  "reject",
-  "process",
-];
+
 
 const ProgressPage = ({ id }) => {
-
   const [progressData, setProgressData] = useState();
 
   const config = {
     headers: {
       Authorization:
-        "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFUFU5M09fbk1VOEZzUERoVFV5RWJyVUtXMm5GLWVxX3FyLU00V1U0LWRrIn0.eyJleHAiOjE2NTY2MjIwMzUsImlhdCI6MTY1NjU4NjY2NywiYXV0aF90aW1lIjoxNjU2NTg2MDM1LCJqdGkiOiI0ZTEzZjdkNy1iYjY1LTRkOTQtODY0OC02ZDczZjI2ZmFhOTYiLCJpc3MiOiJodHRwOi8vMTEuMC4wLjExODo4MTgwL2F1dGgvcmVhbG1zL3NhbXBsZSIsImF1ZCI6WyJjb3N0YV9jbG91ZF8xMDkiLCJyZWFsbS1tYW5hZ2VtZW50IiwiY29zdGFfbWluaW8iLCJjb3N0YV9jbG91ZF9kaXNjb3ZlcnkiLCJjb3N0YV9jbG91ZF8xMTgiLCJjb3N0YV9jbG91ZF9nYXRld2F5IiwiY29zdGFfY2xvdWRfY29uZmlnIiwiY29zdGFfbWluaW9fMTU5IiwiYWNjb3VudCJdLCJzdWIiOiIyMTMzMDJiOC04ZTI3LTQ0MTAtYWI4My02N2NhNDVhNDc3ZmMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJjb3N0YV9jbG91ZCIsIm5vbmNlIjoiMDc2MDYxYjQtNTIyOC00ZjA3LWI3NzgtMmY5MDRmM2ZmNTRmIiwic2Vzc2lvbl9zdGF0ZSI6Ijg2MjE5NGMyLWZiMWYtNGIyOS1iZTVhLTkwNWM3OWU4ZWVmOSIsImFjciI6IjAiLCJhbGxvd2VkLW9yaWdpbnMiOlsiKiIsImh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImNvc3RhX2Nsb3VkXzEwOSI6eyJyb2xlcyI6WyJyb2xlMiJdfSwicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJ2aWV3LXJlYWxtIiwidmlldy1pZGVudGl0eS1wcm92aWRlcnMiLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsInJlYWxtLWFkbWluIiwiY3JlYXRlLWNsaWVudCIsIm1hbmFnZS11c2VycyIsInF1ZXJ5LXJlYWxtcyIsInZpZXctYXV0aG9yaXphdGlvbiIsInF1ZXJ5LWNsaWVudHMiLCJxdWVyeS11c2VycyIsIm1hbmFnZS1ldmVudHMiLCJtYW5hZ2UtcmVhbG0iLCJ2aWV3LWV2ZW50cyIsInZpZXctdXNlcnMiLCJ2aWV3LWNsaWVudHMiLCJtYW5hZ2UtYXV0aG9yaXphdGlvbiIsIm1hbmFnZS1jbGllbnRzIiwicXVlcnktZ3JvdXBzIl19LCJjb3N0YV9taW5pbyI6eyJyb2xlcyI6WyJyb2xlMiJdfSwiY29zdGFfY2xvdWQiOnsicm9sZXMiOlsicm9sZTIiXX0sImNvc3RhX2Nsb3VkX2Rpc2NvdmVyeSI6eyJyb2xlcyI6WyJyb2xlMiJdfSwiY29zdGFfY2xvdWRfMTE4Ijp7InJvbGVzIjpbInJvbGUyIl19LCJjb3N0YV9jbG91ZF9nYXRld2F5Ijp7InJvbGVzIjpbInJvbGUyIl19LCJjb3N0YV9jbG91ZF9jb25maWciOnsicm9sZXMiOlsicm9sZTIiXX0sImNvc3RhX21pbmlvXzE1OSI6eyJyb2xlcyI6WyJyb2xlMiJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIG9wZW5pZCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicm9sZSI6WyJyb2xlMiJdLCJncnAiOlsiN3dnaHJjIl0sInByZWZlcnJlZF91c2VybmFtZSI6Im5ldzIiLCJ1c2VybmFtZSI6Im5ldzIiLCJwb2xpY3kiOiJyZWFkd3JpdGUsIGRpYWdub3N0aWNzLCBjb25zb2xlQWRtaW4ifQ.Mcrz-hFEbedeb9GSlkY5_m-lkQTJg6fkOEXYjyHKd0WEaJYz_Qrfa9g9xQc4wMr2YVUr4EhMuapZf345CVRIbV97iv71m4lrEB0fVWvt_kkBbhMmzH0Uvg7kAT4PZlZL-T9DKD0hTNUhrOu-Arh1TVMLk4jMwfBCSeRDyJr5tjZ16-7-1eYNGJw46rJMGSKpxdIOZaCtGF-14-6dHlCwb2wCJ5TaOxPy5ILG5y7bfmtZNCvjqAj5YDU97r_qnP84XuESB7euUfo3Cn_AT4FuvnshPEffn0TRXvH_sH2lZMhua8urJKXxn5sHG117Ia0tdmAv09zlQH4k3BQgqdqJAg",
+        "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFUFU5M09fbk1VOEZzUERoVFV5RWJyVUtXMm5GLWVxX3FyLU00V1U0LWRrIn0.eyJleHAiOjE2NTY2ODM0NDUsImlhdCI6MTY1NjY0NzU0MSwiYXV0aF90aW1lIjoxNjU2NjQ3NDQ1LCJqdGkiOiJjMTc4M2FmNy01ODRkLTQ2Y2UtOWFlZC0xNDgxMjU1NDZkZjkiLCJpc3MiOiJodHRwOi8vMTEuMC4wLjExODo4MTgwL2F1dGgvcmVhbG1zL3NhbXBsZSIsImF1ZCI6WyJjb3N0YV9jbG91ZF8xMDkiLCJjb3N0YV9taW5pbyIsImNvc3RhX2Nsb3VkX2dhdGV3YXkiLCJjb3N0YV9jbG91ZF8xMTgiLCJjb3N0YV9taW5pb18xNTkiLCJhY2NvdW50Il0sInN1YiI6ImE0MmE5OTliLWI2NzEtNDQ3ZS1iMmM3LWZiNjdkODA1YzZiYiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNvc3RhX2Nsb3VkIiwibm9uY2UiOiJkMWU2OGJjMy1iYzM3LTRjNzUtYmRhNi05Y2M3ZTAyNTNjNTQiLCJzZXNzaW9uX3N0YXRlIjoiZDNlZDAwMmYtM2VlOC00ZDUxLWJkNmUtYTYzZmQxODFiMWQyIiwiYWNyIjoiMCIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiY29zdGFfY2xvdWRfMTA5Ijp7InJvbGVzIjpbIjl3Zy5jYWQudXNlcjEiXX0sImNvc3RhX2Nsb3VkIjp7InJvbGVzIjpbIjl3Zy5jYWQudXNlcjEiXX0sImNvc3RhX21pbmlvIjp7InJvbGVzIjpbIjl3Zy5jYWQudXNlcjEiXX0sImNvc3RhX2Nsb3VkX2dhdGV3YXkiOnsicm9sZXMiOlsiOXdnLmNhZC51c2VyMSJdfSwiY29zdGFfY2xvdWRfMTE4Ijp7InJvbGVzIjpbIjl3Zy5jYWQudXNlcjEiXX0sImNvc3RhX21pbmlvXzE1OSI6eyJyb2xlcyI6WyI5d2cuY2FkLnVzZXIxIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUgb3BlbmlkIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJyb2xlIjpbIjl3Zy5jYWQudXNlcjEiXSwiZ3JwIjpbIjl3Z2NhZCJdLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJuZXc0IiwidXNlcm5hbWUiOiJuZXc0IiwicG9saWN5IjoicmVhZHdyaXRlLCBkaWFnbm9zdGljcywgY29uc29sZUFkbWluIn0.u5TuYKX_-vXg6tD9OZdsi9kJWNGWWRV6Rq_5aF6YZbbl84zGfvu6YeWmpFIKaDjQ-910w12wAA5eMwXJQiE41g_21yMwpUaY8SudI3c1oiVrS6EvhgToog0GkXywUyVGlsonkfcwdjsjKjY3HOt--5SKRLTdNcLTv6ROps2WZ1-Gj6WxWDkN_USv1J67KStlPCAZ-9-xO4262ZZsITTQ5BXyvLEx5pRK_20mZOxnIGKVwlE9OmXXPottvmHojwreoijTMfTLJWerUU8xS_HbYhTnDmKGTcgYZcWnVf6aGtiTVlzK-nboDrJJ6Eq4Witvqp9FWP7_LRykwQMYuGOy0g",
     },
   };
 
   useEffect(() => {
     axios
-      .get(`/dashboard_service/api/getData/PA-IAF-new2-1-3}`, config)
+      .get(`/dashboard_service/api/getData/${id}}`, config)
       .then((response) => {
         setProgressData(response.data.data);
-        console.log("this is Progress data", response.data.data);
       });
   }, []);
-
+  console.log("this is progressData", progressData);
 
   return (
     <Grid container className="progressPage_container">
@@ -65,15 +32,19 @@ const ProgressPage = ({ id }) => {
         <h3 className="personal">Personal id: {id}</h3>
 
         <div className="progressbar">
-          {steps.map((data, i) => (
-            <div className="Progress-step">
-              <div className="Progress_div">
-                <p className="progressCount">{i + 1}</p>
-                {(i + 1) % 10 !== 0 && (i + 1) !== steps.length && <div></div>}
+          {progressData &&
+            progressData.map((item, i) => (
+              <div className="Progress-step">
+                <p className="progressText">{item.message}</p>
+                <div className="Progress_div">
+                  <p className="progressCount">{i + 1}</p>
+                  {(i + 1) % 10 !== 0 && i + 1 !== progressData.length && (
+                    <div></div>
+                    )}
+                </div>
+                <p className="progressText">{item.date}</p>
               </div>
-              <p className="progressText">{data}</p>
-            </div>
-          ))}
+            ))}
         </div>
       </Grid>
     </Grid>

@@ -19,7 +19,7 @@ const Navbar = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{ backgroundColor: "#21201E" }}>
         <Toolbar variant="dense">
-          {!keycloak.authenticated && (
+          {/* {!keycloak.authenticated && (
             <Button
               variant="outlined"
               style={{ color: "white", borderColor: "gray" }}
@@ -27,7 +27,7 @@ const Navbar = () => {
             >
               Login
             </Button>
-          )}
+          )} */}
           {keycloak.authenticated && (
             <Button
               variant="outlined"

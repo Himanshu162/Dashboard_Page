@@ -5,13 +5,14 @@
 
 .personal {
   font-size: 20px !important;
-  padding-bottom: 5px !important;
+  padding-bottom: 0px !important;
   font-weight: 400 !important;
+  margin-left: -50px;
 }
 
 .progressbar {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .progressCount {
@@ -32,9 +33,15 @@
   padding: 12px 0;
   background-color: #dcdcdc;
   border-radius: 50%;
+
+  
 }
 .Progress_div > div {
   height: 2px;
   width: 100%;
   background-color: #dcdcdc;
+}
+
+.progressText{
+  margin-left: -55px !important;
 }
