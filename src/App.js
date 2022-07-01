@@ -1,3 +1,4 @@
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import StepForm from "./components/StepForm";
 import List from "./components/List";
@@ -9,6 +10,7 @@ import Navbar from "./components/Navbar";
 
 function App() {
   return (
+    <>
     <ReactKeycloakProvider authClient={keycloak}>
       <Navbar />
     <Routes>
@@ -17,6 +19,7 @@ function App() {
       <Route path="/progress" element={<ProgressPage />} />
     </Routes>
     </ReactKeycloakProvider>
+    </>
   );
 }
 
