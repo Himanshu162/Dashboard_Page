@@ -9,11 +9,7 @@ const Navbar = () => {
   const { keycloak } = useKeycloak();
   console.log("Keycloack", keycloak);
 
-  // keycloak.init({ onLoad: "login-required" }).then(function (authenticated) {
-  //   if (!authenticated) {
-  //   } else {
-  //   }
-  // });
+
 
   return (
     <Box sx={{ flexGrow: 1 }}>

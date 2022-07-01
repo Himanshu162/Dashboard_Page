@@ -5,7 +5,6 @@ import List from "./components/List";
 import ProgressPage from "./components/ProgressPage";
 import keycloak from "./keycloack";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
-// import PrivateRoute from "./helper/PrivateRoute";
 import Navbar from "./components/Navbar";
 
 function App() {
