@@ -34,10 +34,12 @@ const ProgressPage = ({ id }) => {
         <div className="progressbar">
           {progressData &&
             progressData.map((item, i) => (
-              <div className="Progress-step">
+              <div className="Progress-step" key={i}>
                 <p className="progressText">{item.message}</p>
                 <div className="Progress_div">
-                  <p className="progressCount">{i + 1}</p>
+              
+                  <p className="progressCount" >{i + 1}</p>
+                  
                   {(i + 1) % 10 !== 0 && i + 1 !== progressData.length && (
                     <div></div>
                     )}
