@@ -68,7 +68,7 @@ const List = () => {
 
   useEffect(() => {
     axios
-      .get("/dashboard_service/api/getInProgressProcessList", config)
+      .get("/dashboard_service/api/getInProgressProcessList",config)
       .then((response) => {
         setListData(response.data.data);
         console.log("this is List data", response.data);
