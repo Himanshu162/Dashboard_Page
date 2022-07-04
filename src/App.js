@@ -8,17 +8,18 @@ import { ReactKeycloakProvider } from "@react-keycloak/web";
 import Navbar from "./components/Navbar";
 
 function App() {
+
   return (
     <>
       <ReactKeycloakProvider
         authClient={keycloak}
-        initOptions={{ onLoad: "login-required" }}
+        initOptions={{ onLoad: "login-required"}}        
       >
         <Navbar />
-        <Routes>
-          <Route path="/" element={<StepForm />} />
-          <Route path="/list" element={<List />} />
-          <Route path="/progress" element={<ProgressPage />} />
+        <Routes >
+          <Route exact path="/" element={<StepForm />} />
+          <Route exact path="/list" element={<List />} />
+          <Route exact path="/progress" element={<ProgressPage />} />
         </Routes>
       </ReactKeycloakProvider>
     </>
