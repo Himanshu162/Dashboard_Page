@@ -1,6 +1,12 @@
 import { combineReducers } from "redux";
-import userDataReducer from "./reducers/reducer";
+import count from "./reducers/countReducer";
+import list from "./reducers/listReducer";
+import alert from "./reducers/alertReducer";
+import progressPage from "./reducers/progressPageReducer";
 
 export default combineReducers({
-  listData:userDataReducer,
+  alert,
+  count,
+  list,
+  progressPage,
 });

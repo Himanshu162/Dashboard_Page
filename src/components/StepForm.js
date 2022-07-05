@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "../Assets/CSS/StepForm.css";
 import { Card, Grid, Divider } from "@mui/material";
 import { Doughnut } from "react-chartjs-2";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { getUserData } from "../Redux/actions/action";
-// import data from "../data.json";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Chart,
   PieController,
@@ -15,6 +12,7 @@ import {
   Tooltip,
   Title,
 } from "chart.js";
+import { getCount } from "../Redux/actions/countAction";
 
 Chart.register(PieController, ArcElement, Title, Legend, Tooltip);
 const options = {
@@ -42,38 +40,18 @@ const data_2 = {
 };
 
 const StepForm = () => {
-  const [count, setCount] = useState([]);
-
-  let data = sessionStorage.getItem("jwt_token");
-
-  const config = {
-    headers: {
-      Authorization:
-        `Bearer ${data}`,
-    },
-  };
+  const { count } = useSelector((state) => state.count);
+  const dispatch = useDispatch();
   useEffect(() => {
-    axios
-      .get("/dashboard_service/api/getProcessCount", config)
-      .then((response) => {
-        setCount(response.data);
-
-        console.log("this is response data", response);
-      });
+    dispatch(getCount("dashboard_service/api/getProcessCount"));
   }, []);
+
 
   let navigate = useNavigate();
   const routeChange = () => {
     let path = "/list";
     navigate(path);
   };
-
-  // const stepformdata = useSelector((state) => state.listData.userData);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getUserData(data));
-  }, [dispatch]);
-
   return (
     <div className="stepform_container">
       <Grid xs={6} item>
@@ -84,7 +62,7 @@ const StepForm = () => {
           <Divider style={{ marginBottom: "20px" }} />
           <div className="icons">
             <div className="main_div">
-              <div>{count.inProgress}</div>
+              <div>{count && count.inProgress}</div>
 
               <Doughnut
                 data={data_1}
@@ -99,7 +77,7 @@ const StepForm = () => {
               <h3 className="text_content">In Process</h3>
             </div>
             <div className="main_div">
-              <div>{count.completed}</div>
+              <div>{count && count.completed}</div>
               <Doughnut
                 data={data_2}
                 options={options}

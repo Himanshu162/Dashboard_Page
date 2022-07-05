@@ -4,10 +4,13 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { Button } from "@mui/material";
 import { useKeycloak } from "@react-keycloak/web";
+// import { useNavigate } from 'react-router-dom';
+
+
 
 const Navbar = () => {
   const { keycloak } = useKeycloak();
-
+  // const navigate = useNavigate();
   React.useEffect(() => {
     if (keycloak.authenticated) {
       keycloak
@@ -16,13 +19,14 @@ const Navbar = () => {
           sessionStorage.setItem("jwt_token", keycloak.token);
           sessionStorage.setItem("userInfo", JSON.stringify(resp));
           sessionStorage.setItem("username", resp.username);
-          console.log("this is user response", resp);
+          console.log("userLoginInfo", resp);
         })
         .catch((err) => {
           console.log(err);
         });
     }
   });
+
 
   setTimeout(() => {
     keycloak
@@ -60,6 +64,7 @@ const Navbar = () => {
                 justifyContent: "space-around",
               }}
               onClick={() => keycloak.logout()}
+             
             >
               Logout
             </Button>

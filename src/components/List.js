@@ -11,10 +11,8 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ProgressPage from "./ProgressPage";
 import "../Assets/CSS/List.css";
-import { useDispatch } from "react-redux";
-import { getUserData } from "../Redux/actions/action";
-// import data from "../data.json";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getList } from "../Redux/actions/listAction";
 
 const useStyles = makeStyles({
   root: {
@@ -26,14 +24,28 @@ const useStyles = makeStyles({
   },
 });
 
-const ExpandableTableRow = ({ children, expandComponent, ...otherProps }) => {
+const ExpandableTableRow = ({
+  children,
+  expandComponent,
+  newExpanded,
+  index,
+  ...otherProps
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleRowExpand = () => {
+    setIsExpanded(false);
+
+    setTimeout(() => {
+      setIsExpanded(!isExpanded);
+    }, 100);
+  };
 
   return (
     <>
       <TableRow {...otherProps}>
         <TableCell padding="checkbox">
-          <IconButton onClick={() => setIsExpanded(!isExpanded)}>
+          <IconButton onClick={handleRowExpand}>
             {isExpanded ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />}
           </IconButton>
         </TableCell>
@@ -51,30 +63,10 @@ const ExpandableTableRow = ({ children, expandComponent, ...otherProps }) => {
 
 const List = () => {
   const classes = useStyles();
-  // const userList = useSelector((state) => state.listData.userData);
   const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.list);
   useEffect(() => {
-    dispatch(getUserData(data));
-  }, [dispatch]);
-
-  const [listData, setListData] = useState(null);
-  let data = sessionStorage.getItem("jwt_token");
-  const config = {
-    headers: {
-      Authorization:
-        `Bearer ${data}`,
-    },
-  };
-  useEffect(() => {
-    axios
-      .get(
-        "/dashboard_service/api/getInProgressProcessList",
-        config
-      )
-      .then((response) => {
-        setListData(response.data.data);
-        console.log("this is List data", response.data);
-      });
+    dispatch(getList("dashboard_service/api/getInProgressProcessList"));
   }, []);
 
   return (
@@ -99,8 +91,8 @@ const List = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {listData &&
-            listData.map((item, i) => (
+          {data &&
+            data.map((item, i) => (
               <ExpandableTableRow
                 key={i}
                 expandComponent={

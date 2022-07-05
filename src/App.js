@@ -6,14 +6,12 @@ import ProgressPage from "./components/ProgressPage";
 import keycloak from "./keycloack";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
 import Navbar from "./components/Navbar";
-
 function App() {
-
   return (
     <>
       <ReactKeycloakProvider
         authClient={keycloak}
-        initOptions={{ onLoad: "login-required"}}        
+        initOptions={{ onLoad: "login-required"}}         
       >
         <Navbar />
         <Routes >
