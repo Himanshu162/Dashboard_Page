@@ -97,7 +97,7 @@ const List = () => {
                 key={i}
                 expandComponent={
                   <TableCell colSpan="5">
-                    <ProgressPage id={item.id} />
+                    <ProgressPage id={item.id} stepper={item.steps} />
                   </TableCell>
                 }
               >

@@ -3,14 +3,13 @@ import React, { useEffect } from "react";
 import "../Assets/CSS/ProgressPage.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getProgressData } from "../Redux/actions/progressPageAction";
 
-const ProgressPage = ({ id }) => {
+const ProgressPage = ({ id, stepper }) => {
   const dispatch = useDispatch();
-  const { stepper } = useSelector((state) => state.progressPage);
   useEffect(() => {
-    dispatch(getProgressData(`dashboard_service/api/getData/${id}}`));
+    dispatch(getProgressData(`dashboard_service/api/getData/${id}}`, id));
   }, []);
 
   return (
@@ -23,9 +22,9 @@ const ProgressPage = ({ id }) => {
             <div className="Progress-step">
               <p className="progressText">{item.message}</p>
               <div className="Progress_div">
-                <p className="progressCount">{i + 1}</p>
+                <p className={`progressCount ${""}`}>{i + 1}</p>
 
-                {(i + 1) % 10 !== 0 && i + 1 !== stepper.length && (
+                {(i + 1) % 5 !== 0 && i + 1 !== stepper.length && (
                   <div></div>
                 )}
               </div>
