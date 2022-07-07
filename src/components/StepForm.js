@@ -23,7 +23,7 @@ const data_1 = {
   datasets: [
     {
       data: [100],
-      backgroundColor: ["rgb(54, 162, 235)"],
+      backgroundColor: ["#6666ff"],
       hoverOffset: 4,
     },
   ],
@@ -33,7 +33,7 @@ const data_2 = {
   datasets: [
     {
       data: [100],
-      backgroundColor: ["green"],
+      backgroundColor: ["#009900"],
       hoverOffset: 4,
     },
   ],
@@ -45,7 +45,6 @@ const StepForm = () => {
   useEffect(() => {
     dispatch(getCount("dashboard_service/api/getProcessCount"));
   }, []);
-
 
   let navigate = useNavigate();
   const routeChange = () => {
@@ -81,7 +80,8 @@ const StepForm = () => {
               <Doughnut
                 data={data_2}
                 options={options}
-                style={{ height: "230px", width: "230px" }}
+                style={{ height: "230px", width: "230px", cursor: "pointer" }}
+                onClick={routeChange}
               />
               <h3 className="text_content">Completed Process</h3>
             </div>

@@ -9,7 +9,8 @@ import { getProgressData } from "../Redux/actions/progressPageAction";
 const ProgressPage = ({ id, stepper }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getProgressData(`dashboard_service/api/getData/${id}}`, id));
+    dispatch(getProgressData(`dashboard_service/api/getData/${id}`, id));
+    console.log(id, "this is id");
   }, []);
 
   return (
@@ -18,19 +19,59 @@ const ProgressPage = ({ id, stepper }) => {
         <h3 className="personal">Personal id: {id}</h3>
 
         <div className="progressbar">
-          {stepper && stepper.map((item, i) => (
-            <div className="Progress-step">
-              <p className="progressText">{item.message}</p>
-              <div className="Progress_div">
-                <p className={`progressCount ${""}`}>{i + 1}</p>
+          {stepper &&
+            stepper.map((item, i) => (
+              <div className="Progress-step">
+                <p className="progressText">{item.message}</p>
 
-                {(i + 1) % 5 !== 0 && i + 1 !== stepper.length && (
-                  <div></div>
-                )}
+                <div className="Progress_div">
+                  <p
+                    className="progressCount"
+                    style={{
+                      backgroundColor: item.message.includes("signed")
+                        ? "#6666ff"
+                        : item.message.includes("created")
+                        ? "#6666ff"
+                        : item.message.includes("sent")
+                        ? "#6666ff"
+                        : item.message.includes("Approved")
+                        ? "#009900"
+                        : item.message.includes("forwered")
+                        ? "#6666ff"
+                        : item.message.includes("rejected")
+                        ? "rgb(230, 81, 71"
+                        : "#fff",
+                      color: "#fff",
+                    }}
+                  >
+                    {i + 1}
+                  </p>
+
+                  {(i + 1) % 5 !== 0 && i + 1 !== stepper.length && (
+                    <div
+                      style={{
+                        backgroundColor: item.message.includes("signed")
+                          ? "#6666ff"
+                          : item.message.includes("signed")
+                          ? "#6666ff"
+                          : item.message.includes("sent")
+                          ? "#6666ff"
+                          : item.message.includes("Approved")
+                          ? "#009900"
+                          : item.message.includes("created")
+                          ? "#6666ff"
+                          : item.message.includes("forwered")
+                          ? "#6666ff"
+                          : item.message.includes("rejected")
+                          ? "rgb(230, 81, 71)"
+                          : "#fff",
+                      }}
+                    ></div>
+                  )}
+                </div>
+                <p className="progressText">{item.date}</p>
               </div>
-              <p className="progressText">{item.date}</p>
-            </div>
-          ))}
+            ))}
         </div>
       </Grid>
     </Grid>
