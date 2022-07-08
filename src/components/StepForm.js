@@ -4,6 +4,7 @@ import { Card, Grid, Divider } from "@mui/material";
 import { Doughnut } from "react-chartjs-2";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   Chart,
   PieController,
@@ -13,6 +14,7 @@ import {
   Title,
 } from "chart.js";
 import { getCount } from "../Redux/actions/countAction";
+import Cookies from "js-cookie";
 
 Chart.register(PieController, ArcElement, Title, Legend, Tooltip);
 const options = {
@@ -41,16 +43,24 @@ const data_2 = {
 
 const StepForm = () => {
   const { count } = useSelector((state) => state.count);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCount("dashboard_service/api/getProcessCount"));
   }, []);
 
   let navigate = useNavigate();
-  const routeChange = () => {
+
+  const routeChange = (val) => {
     let path = "/list";
+    
+    Cookies.set("status", val)
     navigate(path);
   };
+
+  useEffect(()=>{
+    Cookies.remove("status")
+  })
   return (
     <div className="stepform_container">
       <Grid xs={6} item>
@@ -71,7 +81,7 @@ const StepForm = () => {
                   width: "230px",
                   cursor: "pointer",
                 }}
-                onClick={routeChange}
+                onClick={() => routeChange("inProgress")}
               />
               <h3 className="text_content">In Process</h3>
             </div>
@@ -81,7 +91,7 @@ const StepForm = () => {
                 data={data_2}
                 options={options}
                 style={{ height: "230px", width: "230px", cursor: "pointer" }}
-                onClick={routeChange}
+                onClick={() => routeChange("completed")}
               />
               <h3 className="text_content">Completed Process</h3>
             </div>

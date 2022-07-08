@@ -38,7 +38,7 @@ const ProgressPage = ({ id, stepper }) => {
                         ? "#009900"
                         : item.message.includes("forwered")
                         ? "#6666ff"
-                        : item.message.includes("rejected")
+                        : item.message.includes("Rejected")
                         ? "rgb(230, 81, 71"
                         : "#fff",
                       color: "#fff",
@@ -62,14 +62,14 @@ const ProgressPage = ({ id, stepper }) => {
                           ? "#6666ff"
                           : item.message.includes("forwered")
                           ? "#6666ff"
-                          : item.message.includes("rejected")
+                          : item.message.includes("Rejected")
                           ? "rgb(230, 81, 71)"
                           : "#fff",
                       }}
                     ></div>
                   )}
                 </div>
-                <p className="progressText">{item.date}</p>
+                <p className="progressTime">{item.date}</p>
               </div>
             ))}
         </div>
