@@ -52,9 +52,9 @@ const Navbar = () => {
   }, 80000);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ backgroundColor: "#21201E" }}>
-        <Toolbar variant="dense">
+    <Box>
+      <AppBar position="static">
+        <Toolbar variant="dense" style={{position:"fixed", backgroundColor: "#21201E",width:"100%",left:0, marginTop:"-.5rem"}}>
           {keycloak.authenticated && (
             <Button
               variant="outlined"
@@ -62,6 +62,7 @@ const Navbar = () => {
                 color: "white",
                 borderColor: "gray",
                 justifyContent: "space-around",
+                left:0
               }}
               onClick={() => keycloak.logout()}
              

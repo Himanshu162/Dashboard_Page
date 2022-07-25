@@ -1,21 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import { IconButton } from "@mui/material";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  IconButton,
+  Button,
+  Paper,
+  TextField,
+  Grid,
+} from "@material-ui/core";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
+import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
+import FilterListIcon from "@material-ui/icons/FilterList";
 import ProgressPage from "./ProgressPage";
 import "../Assets/CSS/List.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getList } from "../Redux/actions/listAction";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import { Typography } from "@mui/material";
+import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles({
   root: {
@@ -65,12 +75,37 @@ const ExpandableTableRow = ({
 };
 
 const List = () => {
+  const [filtertopen, setFilteropen] = useState(null);
   let navigate = useNavigate();
   const classes = useStyles();
   const dispatch = useDispatch();
-  // const location = useLocation();
   const { data } = useSelector((state) => state.list);
   let status = Cookies.get("status");
+  const [value, setValue] = useState("subject");
+
+  const filterType = [
+    {
+      value: "subject",
+      label: "Subject",
+    },
+    {
+      value: "fileNO",
+      label: "File Number",
+    },
+    {
+      value: "date",
+      label: "Date Range",
+    },
+    {
+      value: "sendFrom",
+      label: "Send From",
+    },
+    {
+      value: "sendTo",
+      label: "Send To",
+    },
+  ];
+
   useEffect(() => {
     if (status === "completed") {
       dispatch(getList("dashboard_service/api/getCompletedProcessList"));
@@ -83,17 +118,143 @@ const List = () => {
     let path = "/";
     navigate(path);
   };
+
+  const handleClick = (event) => {
+    setFilteropen(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setFilteropen(null);
+  };
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
   return (
     <Paper
       className={classes.root}
       style={{ marginTop: "50px", boxShadow: "none" }}
     >
       <HomeOutlinedIcon
-        style={{ cursor: "pointer", marginLeft: "20px", color: "gray" }}
+        style={{
+          cursor: "pointer",
+          marginLeft: "20px",
+          top: "6rem",
+          color: "gray",
+        }}
         onClick={HomePageNavigation}
         className="homeIcon"
       />
-      <h1 className="heading_list">Candidate Status</h1>
+      <Typography variant="h4" className="heading_list">
+        Personal Application Status
+      </Typography>
+      <div className="filter_list">
+        <Button
+          style={{ float: "left", textTransform: "capitalize" }}
+          color="primary"
+          variant="contained"
+          onClick={handleClick}
+          startIcon={<FilterListIcon />}
+        >
+          Filter
+        </Button>
+        <Menu
+          filtertopen={filtertopen}
+          open={Boolean(filtertopen)}
+          onClose={handleClose}
+          width="fillwidth"
+        >
+          <TextField
+            select
+            label="Select Filter"
+            variant="outlined"
+            fullWidth
+            value={value}
+            onChange={handleChange}
+            size="small"
+            style={{ marginTop:"10px",}}
+          >
+            {filterType.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+          <form>
+            <div style={{ marginTop: "1rem" }}>
+              {value === "subject" ? (
+                <TextField
+                  label="Enter Subject"
+                  variant="outlined"
+                  size="small"
+                  fullWidth
+                />
+              ) : value === "fileNO" ? (
+                <TextField
+                  label="Enter File Number"
+                  variant="outlined"
+                  size="small"
+                  fullWidth
+                />
+              ) : value === "date" ? (
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <TextField
+                      label="Date From"
+                      type="date"
+                      defaultValue={new Date()}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                      size="small"
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      label="Date To"
+                      type="date"
+                      defaultValue={new Date()}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      fullWidth
+                      variant="outlined"
+                      size="small"
+                    />
+                  </Grid>
+                </Grid>
+              ) : value === "sendFrom" ? (
+                <TextField
+                  label="By Username"
+                  variant="outlined"
+                  size="small"
+                  fullWidth
+                />
+              ) : value === "sendTo" ? (
+                <TextField
+                  label="By Username"
+                  variant="outlined"
+                  size="small"
+                  fullWidth
+                />
+              ) : (
+                <></>
+              )}
+            </div>
+            <Button
+              color="primary"
+              variant="contained"
+              style={{ float: "right", margin: "1rem 0", textTransform:"capitalize" }}
+              startIcon={<SearchIcon />}
+              type="submit"
+            >
+              Serach
+            </Button>
+          </form>
+        </Menu>
+      </div>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>

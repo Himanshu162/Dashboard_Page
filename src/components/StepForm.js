@@ -21,46 +21,48 @@ const options = {
   rotation: -28.5 * Math.PI - (25 / 180) * Math.PI,
 };
 
-const data_1 = {
-  datasets: [
-    {
-      data: [100],
-      backgroundColor: ["#6666ff"],
-      hoverOffset: 4,
-    },
-  ],
-};
-
-const data_2 = {
-  datasets: [
-    {
-      data: [100],
-      backgroundColor: ["#009900"],
-      hoverOffset: 4,
-    },
-  ],
-};
-
 const StepForm = () => {
-  const { count } = useSelector((state) => state.count);
+  // Donought Chart
+  const personal = {
+    labels: ["completed", "inProgress"],
+    datasets: [
+      {
+        data: [50, 50],
+        backgroundColor: ["#FAD02C", "#6666ff"],
+        hoverOffset: 4,
+      },
+    ],
+  };
+  const Letters = {
+    labels: ["completed", "inProgress"],
+    datasets: [
+      {
+        data: [50, 50],
+        backgroundColor: ["#FAD02C", "#6666ff"],
+        hoverOffset: 4,
+      },
+    ],
+  };
 
+  // Redux
+
+  const { count } = useSelector((state) => state.count);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCount("dashboard_service/api/getProcessCount"));
   }, []);
-
+  console.log("this is count data", count);
   let navigate = useNavigate();
 
   const routeChange = (val) => {
     let path = "/list";
-    
-    Cookies.set("status", val)
+    Cookies.set("status", val);
     navigate(path);
   };
 
-  useEffect(()=>{
-    Cookies.remove("status")
-  })
+  useEffect(() => {
+    Cookies.remove("status");
+  });
   return (
     <div className="stepform_container">
       <Grid xs={6} item>
@@ -74,26 +76,26 @@ const StepForm = () => {
               <div>{count && count.inProgress}</div>
 
               <Doughnut
-                data={data_1}
+                data={personal}
                 options={options}
                 style={{
-                  height: "230px",
-                  width: "230px",
+                  height: "250px",
+                  width: "250px",
                   cursor: "pointer",
                 }}
                 onClick={() => routeChange("inProgress")}
               />
-              <h3 className="text_content">In Process</h3>
+              <h3 className="text_content">Personal Application</h3>
             </div>
             <div className="main_div">
-              <div>{count && count.completed}</div>
+              {/* <div>{count && count.completed}</div>  */}
               <Doughnut
-                data={data_2}
+                data={Letters}
                 options={options}
-                style={{ height: "230px", width: "230px", cursor: "pointer" }}
+                style={{ height: "250px", width: "250px", cursor: "pointer" }}
                 onClick={() => routeChange("completed")}
               />
-              <h3 className="text_content">Completed Process</h3>
+              <h3 className="text_content">Service Letters</h3>
             </div>
           </div>
         </Card>
