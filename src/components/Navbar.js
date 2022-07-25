@@ -62,7 +62,8 @@ const Navbar = () => {
                 color: "white",
                 borderColor: "gray",
                 justifyContent: "space-around",
-                left:0
+                left:0,
+                textTransform:"capitalize"
               }}
               onClick={() => keycloak.logout()}
              

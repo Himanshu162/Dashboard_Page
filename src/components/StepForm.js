@@ -93,7 +93,7 @@ const StepForm = () => {
                 data={Letters}
                 options={options}
                 style={{ height: "250px", width: "250px", cursor: "pointer" }}
-                onClick={() => routeChange("completed")}
+                // onClick={() => routeChange("completed")}
               />
               <h3 className="text_content">Service Letters</h3>
             </div>

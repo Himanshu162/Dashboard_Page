@@ -11,6 +11,7 @@ import {
   Paper,
   TextField,
   Grid,
+  Dialog
 } from "@material-ui/core";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
@@ -22,10 +23,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getList } from "../Redux/actions/listAction";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Typography } from "@mui/material";
 import SearchIcon from "@material-ui/icons/Search";
+
 
 const useStyles = makeStyles({
   root: {
@@ -132,7 +133,7 @@ const List = () => {
   };
   return (
     <Paper
-      className={classes.root}
+      className="filter_list"
       style={{ marginTop: "50px", boxShadow: "none" }}
     >
       <HomeOutlinedIcon
@@ -158,11 +159,11 @@ const List = () => {
         >
           Filter
         </Button>
-        <Menu
-          filtertopen={filtertopen}
-          open={Boolean(filtertopen)}
+        <Dialog
+          open={filtertopen}
           onClose={handleClose}
           width="fillwidth"
+          style={{display:"flex", left:"-1.5rem", top:"-3rem"}}
         >
           <TextField
             select
@@ -253,7 +254,7 @@ const List = () => {
               Serach
             </Button>
           </form>
-        </Menu>
+        </Dialog>
       </div>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>

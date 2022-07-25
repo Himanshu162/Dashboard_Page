@@ -30,12 +30,15 @@
   font-size: 20px;
 }
 
-.MuiMenu-paper {
-  width: 400px;
+.filter_list .MuiPaper-root {
+  width: 400px !important;
   padding: 0 1rem;
 }
 
-.menu_paper .MuiPopover-paper {
-  margin-top: -6rem;
-  position: fixed;
+.MuiDialog-paper {
+  width: 400px !important;
+  padding: 0 1rem;
+  padding-top: 1rem;
+  box-shadow: none !important;
+  background-color: rgb(243, 239, 239) !important;
 }
