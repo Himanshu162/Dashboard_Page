@@ -11,7 +11,7 @@ import {
   Paper,
   TextField,
   Grid,
-  Dialog
+  Dialog,
 } from "@material-ui/core";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
@@ -26,7 +26,6 @@ import { useNavigate } from "react-router-dom";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Typography } from "@mui/material";
 import SearchIcon from "@material-ui/icons/Search";
-
 
 const useStyles = makeStyles({
   root: {
@@ -83,7 +82,21 @@ const List = () => {
   const { data } = useSelector((state) => state.list);
   let status = Cookies.get("status");
   const [value, setValue] = useState("subject");
+  //   {
+  //     startDate: subDays(new Date(), 30),
+  //     endDate: addDays(new Date(), 0),
+  //     key: "selection",
+  //   },
+  // ]);
 
+  const [state, setState] = useState({
+    subject: "",
+    dateFrom: "",
+    dateTo: "",
+    fileNo: "",
+    sendFrom: "",
+    sendTo: "",
+  });
   const filterType = [
     {
       value: "subject",
@@ -108,12 +121,18 @@ const List = () => {
   ];
 
   useEffect(() => {
-    if (status === "completed") {
-      dispatch(getList("dashboard_service/api/getCompletedProcessList"));
-    } else if (status === "inProgress") {
-      dispatch(getList("dashboard_service/api/getInProgressProcessList"));
-    }
+    loadTableData();
   }, []);
+
+  const loadTableData = () => {
+    if (status === "completed") {
+      dispatch(getList("dashboard_service/api/getCompletedProcessList", state));
+    } else if (status === "inProgress") {
+      dispatch(
+        getList("dashboard_service/api/getInProgressProcessList", state)
+      );
+    }
+  };
 
   const HomePageNavigation = () => {
     let path = "/";
@@ -131,6 +150,18 @@ const List = () => {
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setState({ ...state, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    loadTableData();
+  };
+
+  const { subject, dateFrom, dateTo, fileNo, sendFrom, sendTo } = state;
+
   return (
     <Paper
       className="filter_list"
@@ -163,7 +194,7 @@ const List = () => {
           open={filtertopen}
           onClose={handleClose}
           width="fillwidth"
-          style={{display:"flex", left:"-1.5rem", top:"-3rem"}}
+          style={{ display: "flex", left: "-1.5rem", top: "-3rem" }}
         >
           <TextField
             select
@@ -173,7 +204,7 @@ const List = () => {
             value={value}
             onChange={handleChange}
             size="small"
-            style={{ marginTop:"10px",}}
+            style={{ marginTop: "10px" }}
           >
             {filterType.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -181,14 +212,17 @@ const List = () => {
               </MenuItem>
             ))}
           </TextField>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div style={{ marginTop: "1rem" }}>
               {value === "subject" ? (
                 <TextField
                   label="Enter Subject"
                   variant="outlined"
                   size="small"
+                  name="subject"
+                  value={subject}
                   fullWidth
+                  onChange={handleInputChange}
                 />
               ) : value === "fileNO" ? (
                 <TextField
@@ -196,6 +230,9 @@ const List = () => {
                   variant="outlined"
                   size="small"
                   fullWidth
+                  name="fileNo"
+                  value={fileNo}
+                  onChange={handleInputChange}
                 />
               ) : value === "date" ? (
                 <Grid container spacing={2}>
@@ -210,6 +247,9 @@ const List = () => {
                       fullWidth
                       variant="outlined"
                       size="small"
+                      name="dateFrom"
+                      value={dateFrom}
+                      onChange={handleInputChange}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -223,6 +263,9 @@ const List = () => {
                       fullWidth
                       variant="outlined"
                       size="small"
+                      name="dateTo"
+                      value={dateTo}
+                      onChange={handleInputChange}
                     />
                   </Grid>
                 </Grid>
@@ -232,6 +275,9 @@ const List = () => {
                   variant="outlined"
                   size="small"
                   fullWidth
+                  onChange={handleInputChange}
+                  name="sendFrom"
+                  value={sendFrom}
                 />
               ) : value === "sendTo" ? (
                 <TextField
@@ -239,6 +285,9 @@ const List = () => {
                   variant="outlined"
                   size="small"
                   fullWidth
+                  name="sendTo"
+                  value={sendTo}
+                  onChange={handleInputChange}
                 />
               ) : (
                 <></>
@@ -247,7 +296,11 @@ const List = () => {
             <Button
               color="primary"
               variant="contained"
-              style={{ float: "right", margin: "1rem 0", textTransform:"capitalize" }}
+              style={{
+                float: "right",
+                margin: "1rem 0",
+                textTransform: "capitalize",
+              }}
               startIcon={<SearchIcon />}
               type="submit"
             >
