@@ -24,11 +24,12 @@ const ProgressPage = ({ id, stepper }) => {
         <div className="progressbar">
           {stepper &&
             stepper.map((item, i) => (
-              <div className="Progress-step">
-                <p className="progressText">{item.message}</p>
+              <div className="Progress-step" key={i}>
+                <p className="progressText" >{item.message}</p>
                 <div className="Progress_div">
                   <p
                     className="progressCount"
+                    
                     style={{
                       backgroundColor:
                         item.status === 0

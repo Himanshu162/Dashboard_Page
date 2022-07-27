@@ -26,6 +26,8 @@ import { useNavigate } from "react-router-dom";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Typography } from "@mui/material";
 import SearchIcon from "@material-ui/icons/Search";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 
 const useStyles = makeStyles({
   root: {
@@ -75,19 +77,13 @@ const ExpandableTableRow = ({
 };
 
 const List = () => {
-  const [filtertopen, setFilteropen] = useState(null);
+  const [filtertopen, setFilteropen] = useState(false);
   let navigate = useNavigate();
   const classes = useStyles();
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.list);
   let status = Cookies.get("status");
   const [value, setValue] = useState("subject");
-  //   {
-  //     startDate: subDays(new Date(), 30),
-  //     endDate: addDays(new Date(), 0),
-  //     key: "selection",
-  //   },
-  // ]);
 
   const [state, setState] = useState({
     subject: "",
@@ -144,7 +140,7 @@ const List = () => {
   };
 
   const handleClose = () => {
-    setFilteropen(null);
+    setFilteropen(false);
   };
 
   const handleChange = (event) => {
@@ -165,13 +161,13 @@ const List = () => {
   return (
     <Paper
       className="filter_list"
-      style={{ marginTop: "50px", boxShadow: "none" }}
+      style={{ marginTop: "6rem", boxShadow: "none" }}
     >
       <HomeOutlinedIcon
         style={{
           cursor: "pointer",
           marginLeft: "20px",
-          top: "6rem",
+          top: "8rem",
           color: "gray",
         }}
         onClick={HomePageNavigation}
@@ -194,7 +190,7 @@ const List = () => {
           open={filtertopen}
           onClose={handleClose}
           width="fillwidth"
-          style={{ display: "flex", left: "-1.5rem", top: "-3rem" }}
+          style={{ display: "flex", left: "-1.5rem", top: ".8rem" }}
         >
           <TextField
             select
@@ -322,6 +318,9 @@ const List = () => {
             <TableCell align="center" className="table_row">
               Status
             </TableCell>
+            <TableCell align="center" className="table_row">
+              Action
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -343,6 +342,13 @@ const List = () => {
                 </TableCell>
                 <TableCell align="center" className="table_col">
                   {item.status === 0 ? "In progress" : "completed"}
+                </TableCell>
+                <TableCell align="center" className="table_col">
+                  {item.status === 0 ? (
+                    <ThumbUpIcon style={{ color: "#009900" }} />
+                  ) : (
+                    <ThumbDownIcon style={{ color: "rgb(230, 81, 71)" }} />
+                  )}
                 </TableCell>
               </ExpandableTableRow>
             ))}

@@ -2,11 +2,10 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import { Button } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { useKeycloak } from "@react-keycloak/web";
-// import { useNavigate } from 'react-router-dom';
-
-
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import "../Assets/CSS/Navbar.css"
 
 const Navbar = () => {
   const { keycloak } = useKeycloak();
@@ -26,7 +25,6 @@ const Navbar = () => {
         });
     }
   });
-
 
   setTimeout(() => {
     keycloak
@@ -52,28 +50,37 @@ const Navbar = () => {
   }, 80000);
 
   return (
-    <Box>
-      <AppBar position="static">
-        <Toolbar variant="dense" style={{position:"fixed", backgroundColor: "#21201E",width:"100%",left:0, marginTop:"-.5rem"}}>
+
+      <AppBar>
+        <Toolbar
+        className="navbar"
+          variant="dense"
+          style={{
+            position: "fixed",
+            backgroundColor: "#3f51b5",
+            width: "100%",
+            left: 0,
+            marginTop: 0,
+           marginBottom:"5rem"
+           
+          }}
+        >
           {keycloak.authenticated && (
-            <Button
+            <IconButton
               variant="outlined"
+              color="secondary"
               style={{
-                color: "white",
+                color: "#ffbc42",
                 borderColor: "gray",
-                justifyContent: "space-around",
-                left:0,
-                textTransform:"capitalize"
+                justifyContent:"space-around",
               }}
               onClick={() => keycloak.logout()}
-             
             >
-              Logout
-            </Button>
+              <ExitToAppIcon />
+            </IconButton>
           )}
         </Toolbar>
       </AppBar>
-    </Box>
   );
 };
 export default Navbar;

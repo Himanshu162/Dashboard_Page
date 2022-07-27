@@ -44,8 +44,8 @@ const StepForm = () => {
     ],
   };
 
+  
   // Redux
-
   const { count } = useSelector((state) => state.count);
   const dispatch = useDispatch();
   useEffect(() => {
