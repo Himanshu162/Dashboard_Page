@@ -2,31 +2,40 @@
   {
     "id": 1,
     "time": "6:00 am",
-    "status": "In Progress"
+    "status": "1",
+    "value":"0"
   },
+
   {
     "id": 2,
     "time": "7:00 am",
-    "status": "In Progress"
+    "status": "0",
+    "value":"1"
   },
   {
     "id": 3,
     "time": "8:30 am",
-    "status": "In Progress"
+    "status": "1",
+    "value":"0"
   },
+
   {
     "id": 4,
     "time":" 9:00 am",
-    "status": "In Progress"
+    "status": "0",
+    "value":"1"
   },
   {
     "id": 5,
     "time": "9:45 am",
-    "status": "In Progress"
+    "status": "0",
+    "value":"0"
   },
   {
     "id": 6,
     "time": "10:00 am",
-    "status": "In Progress"
+    "status": "1",
+    "value":"1"
   }
+
 ]

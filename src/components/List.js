@@ -344,11 +344,11 @@ const List = () => {
                   {item.status === 0 ? "In progress" : "completed"}
                 </TableCell>
                 <TableCell align="center" className="table_col">
-                  {item.status === 0 ? (
-                    <ThumbUpIcon style={{ color: "#009900" }} />
-                  ) : (
+                  {item.status === 2 ? (
                     <ThumbDownIcon style={{ color: "rgb(230, 81, 71)" }} />
-                  )}
+                    ) : (
+                      <ThumbUpIcon style={{ color: "#009900" }} />
+                      )}
                 </TableCell>
               </ExpandableTableRow>
             ))}

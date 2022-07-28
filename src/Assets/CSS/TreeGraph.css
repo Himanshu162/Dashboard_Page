@@ -1,0 +1,31 @@
+
+  .node circle {
+      fill: #3f51b5;
+      stroke: #3f51b5;
+      stroke-width: 1.5px;
+  }
+  
+  .node text {
+      font-size: 11px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background-color: black;
+      fill: black;
+  }
+  
+  .node {
+      cursor: pointer;
+  }
+  
+  path.link {
+      fill: none;
+      stroke: #2593B8;
+      stroke-width: 1.5px;
+  }
+  
+  
+  span {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      text-shadow: 0 1px 4px black;
+      float: right;
+  }
+  

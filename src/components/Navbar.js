@@ -1,11 +1,10 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { IconButton } from "@mui/material";
 import { useKeycloak } from "@react-keycloak/web";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import "../Assets/CSS/Navbar.css"
+import "../Assets/CSS/Navbar.css";
 
 const Navbar = () => {
   const { keycloak } = useKeycloak();
@@ -50,37 +49,37 @@ const Navbar = () => {
   }, 80000);
 
   return (
-
-      <AppBar>
-        <Toolbar
+    <AppBar>
+      <Toolbar
         className="navbar"
-          variant="dense"
-          style={{
-            position: "fixed",
-            backgroundColor: "#3f51b5",
-            width: "100%",
-            left: 0,
-            marginTop: 0,
-           marginBottom:"5rem"
-           
-          }}
-        >
-          {keycloak.authenticated && (
-            <IconButton
-              variant="outlined"
-              color="secondary"
-              style={{
-                color: "#ffbc42",
-                borderColor: "gray",
-                justifyContent:"space-around",
-              }}
-              onClick={() => keycloak.logout()}
-            >
-              <ExitToAppIcon />
-            </IconButton>
-          )}
-        </Toolbar>
-      </AppBar>
+        variant="dense"
+        style={{
+          position: "fixed",
+          backgroundColor: "#3f51b5",
+          width: "100%",
+          left: 0,
+          marginTop: 0,
+          marginBottom: "5rem",
+        }}
+      >
+        {keycloak.authenticated && (
+          <IconButton
+            variant="outlined"
+            color="secondary"
+            position="fixed"
+            style={{
+              color: "#ffbc42",
+              borderColor: "gray",
+              justifyContent: "space-around",
+              
+            }}
+            onClick={() => keycloak.logout()}
+          >
+            <ExitToAppIcon />
+          </IconButton>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 };
 export default Navbar;

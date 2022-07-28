@@ -60,6 +60,13 @@ const StepForm = () => {
     navigate(path);
   };
 
+  const serviceRoute = (val) => {
+    let path = "/serviceList";
+    navigate(path);
+  };
+
+
+
   useEffect(() => {
     Cookies.remove("status");
   });
@@ -93,7 +100,7 @@ const StepForm = () => {
                 data={Letters}
                 options={options}
                 style={{ height: "250px", width: "250px", cursor: "pointer" }}
-                // onClick={() => routeChange("completed")}
+                onClick={()=>serviceRoute("/serviceList")}
               />
               <h3 className="text_content">Service Letters</h3>
             </div>

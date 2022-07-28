@@ -25,42 +25,55 @@ const ProgressPage = ({ id, stepper }) => {
           {stepper &&
             stepper.map((item, i) => (
               <div className="Progress-step" key={i}>
-                <p className="progressText" >{item.message}</p>
+                <p className="progressText">{item.message}</p>
                 <div className="Progress_div">
                   <p
                     className="progressCount"
-                    
+                    // style={{
+                    //   backgroundColor:
+                    //     item.status === 0
+                    //       ? "#fff"
+                    //       : item.status === 1
+                    //       ? "#fff"
+                    //       : item.status === 2
+                    //       ? "#009900"
+                    //       : "rgb(230, 81, 71)",
+                    //   color: "#fff",
+                    // }}
                     style={{
                       backgroundColor:
                         item.status === 0
-                          ? "rgb(230, 81, 71)"
+                          ? "#fff"
                           : item.status === 1
+                          ? "#c7c7c5"
+                          : item.status === 2
                           ? "#009900"
-                          : "#fff",
-                      color: "#fff",
+                          : "rgb(230, 81, 71)",
+                          color: "#fff",
                     }}
                   >
-                    {item.status === 0 ? (
+                    {item.status === 2 ? 
+                      ++j
+                     : item.status===1?++j:
                       <ErrorOutlineOutlinedIcon
                         style={{ height: "19px", paddingRight: "1.1px" }}
                       />
-                    ) : item.status === 1 ? (
-                      ++j
-                    ) : (
-                      ""
-                    )}
+                    }
                   </p>
 
                   {(i + 1) % 5 !== 0 && i + 1 !== stepper.length && (
                     <div
-                      style={{
-                        backgroundColor:
-                          item.status === 0
-                            ? "rgb(230, 81, 71)"
-                            : item.status === 1
-                            ? "#009900"
-                            : "#fff",
-                      }}
+                    style={{
+                      backgroundColor:
+                        item.status === 0
+                          ? "#fff"
+                          : item.status === 1
+                          ? "#c7c7c5"
+                          : item.status === 2
+                          ? "#009900"
+                          : "rgb(230, 81, 71)",
+                          color: "#fff",
+                    }}
                     ></div>
                   )}
                 </div>

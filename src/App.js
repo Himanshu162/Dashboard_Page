@@ -6,6 +6,8 @@ import ProgressPage from "./components/ProgressPage";
 import keycloak from "./keycloack";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
 import Navbar from "./components/Navbar";
+import ServiceList from "./components/service letters/ServiceList";
+
 function App() {
   return (
     <>
@@ -18,6 +20,7 @@ function App() {
           <Route exact path="/" element={<StepForm />} />
           <Route exact path="/list" element={<List />} />
           <Route exact path="/progress" element={<ProgressPage />} />
+          <Route exact path="/serviceList" element={<ServiceList />} />
         </Routes>
       </ReactKeycloakProvider>
     </>
