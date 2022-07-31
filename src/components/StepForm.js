@@ -17,9 +17,6 @@ import { getCount } from "../Redux/actions/countAction";
 import Cookies from "js-cookie";
 
 Chart.register(PieController, ArcElement, Title, Legend, Tooltip);
-const options = {
-  rotation: -28.5 * Math.PI - (25 / 180) * Math.PI,
-};
 
 const StepForm = () => {
   // Donought Chart
@@ -44,7 +41,20 @@ const StepForm = () => {
     ],
   };
 
-  
+  const options = {
+    rotation: -28.5 * Math.PI - (25 / 180) * Math.PI,
+    onClick: function (evt, element) {
+      if (element.length > 0) {
+        console.log(element, element[0].index);
+        if (element[0].index === 0) {
+          routeChange("inProgress")
+        }else if(element[0].index === 1){
+          routeChange("completed")
+        }
+      }
+    },
+  };
+
   // Redux
   const { count } = useSelector((state) => state.count);
   const dispatch = useDispatch();
@@ -64,8 +74,6 @@ const StepForm = () => {
     let path = "/serviceList";
     navigate(path);
   };
-
-
 
   useEffect(() => {
     Cookies.remove("status");
@@ -90,17 +98,15 @@ const StepForm = () => {
                   width: "250px",
                   cursor: "pointer",
                 }}
-                onClick={() => routeChange("inProgress")}
               />
               <h3 className="text_content">Personal Application</h3>
             </div>
             <div className="main_div">
-              {/* <div>{count && count.completed}</div>  */}
               <Doughnut
                 data={Letters}
                 options={options}
                 style={{ height: "250px", width: "250px", cursor: "pointer" }}
-                onClick={()=>serviceRoute("/serviceList")}
+                onClick={() => serviceRoute("/serviceList")}
               />
               <h3 className="text_content">Service Letters</h3>
             </div>
