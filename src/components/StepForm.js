@@ -47,9 +47,9 @@ const StepForm = () => {
       if (element.length > 0) {
         console.log(element, element[0].index);
         if (element[0].index === 0) {
-          routeChange("inProgress")
-        }else if(element[0].index === 1){
           routeChange("completed")
+        }else if(element[0].index === 1){
+          routeChange("inProgress")
         }
       }
     },
