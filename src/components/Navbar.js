@@ -1,12 +1,26 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import { IconButton } from "@mui/material";
+import { IconButton, Button } from "@mui/material";
 import { useKeycloak } from "@react-keycloak/web";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import "../Assets/CSS/Navbar.css";
+import ListAltIcon from "@material-ui/icons/ListAlt";
+import { Tooltip } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
+import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 
 const Navbar = () => {
+  let navigate = useNavigate();
+  const WorkflowList = () => {
+    let path = "/workflowList";
+    navigate(path);
+  };
+
+  const HomePageNavigation = () => {
+    let path = "/";
+    navigate(path);
+  };
   const { keycloak } = useKeycloak();
   // const navigate = useNavigate();
   React.useEffect(() => {
@@ -71,13 +85,39 @@ const Navbar = () => {
               color: "#ffbc42",
               borderColor: "gray",
               justifyContent: "space-around",
-              
             }}
             onClick={() => keycloak.logout()}
           >
             <ExitToAppIcon />
           </IconButton>
         )}
+        <Tooltip title="Work FLow List">
+        <Button
+          style={{
+            color: "#ffbc42",
+            position: "fixed",
+            marginLeft: "5rem",
+            textTransform: "capitalize",
+          }}
+         onClick={WorkflowList}
+        >
+           <ListAltIcon />
+        </Button>
+        </Tooltip>
+
+        <Tooltip title="Home">
+        <Button
+          style={{
+            color: "#ffbc42",
+            position: "fixed",
+            marginLeft: "2rem",
+            textTransform: "capitalize",
+          }}
+         onClick={HomePageNavigation}
+        >
+           <HomeOutlinedIcon />
+        </Button>
+        </Tooltip>
       </Toolbar>
     </AppBar>
   );

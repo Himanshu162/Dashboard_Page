@@ -15,14 +15,12 @@ import {
 } from "@material-ui/core";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
-import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import ProgressPage from "./ProgressPage";
 import "../Assets/CSS/List.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getList } from "../Redux/actions/listAction";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Typography } from "@mui/material";
 import SearchIcon from "@material-ui/icons/Search";
@@ -78,7 +76,6 @@ const ExpandableTableRow = ({
 
 const List = () => {
   const [filtertopen, setFilteropen] = useState(false);
-  let navigate = useNavigate();
   const classes = useStyles();
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.list);
@@ -130,10 +127,6 @@ const List = () => {
     }
   };
 
-  const HomePageNavigation = () => {
-    let path = "/";
-    navigate(path);
-  };
 
   const handleClick = (event) => {
     setFilteropen(event.currentTarget);
@@ -163,16 +156,6 @@ const List = () => {
       className="filter_list"
       style={{ marginTop: "6rem", boxShadow: "none" }}
     >
-      <HomeOutlinedIcon
-        style={{
-          cursor: "pointer",
-          marginLeft: "20px",
-          top: "8rem",
-          color: "gray",
-        }}
-        onClick={HomePageNavigation}
-        className="homeIcon"
-      />
       <Typography variant="h4" className="heading_list">
         Personal Application Status
       </Typography>

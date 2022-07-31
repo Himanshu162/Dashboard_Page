@@ -7,6 +7,7 @@ import keycloak from "./keycloack";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
 import Navbar from "./components/Navbar";
 import ServiceList from "./components/service letters/ServiceList";
+import WorkflowList from "./components/workFlow/WorkflowList";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route exact path="/list" element={<List />} />
           <Route exact path="/progress" element={<ProgressPage />} />
           <Route exact path="/serviceList" element={<ServiceList />} />
+          <Route exact path="/workflowList" element={< WorkflowList/>}/>
         </Routes>
       </ReactKeycloakProvider>
     </>
