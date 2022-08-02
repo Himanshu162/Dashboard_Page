@@ -16,7 +16,7 @@ const WorkflowList = () => {
   const { workflow } = useSelector((state) => state.workflow);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getWorkflowData("/workflowPA-0.0.1-SNAPSHOT/getWorkflowData"));
+    dispatch(getWorkflowData("/workflowPA/getWorkflowData"));
   }, []);
   console.log("this is work flow data", workflow);
 

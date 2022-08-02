@@ -12,6 +12,7 @@ import {
   TextField,
   Grid,
   Dialog,
+  Chip,
 } from "@material-ui/core";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
@@ -23,7 +24,7 @@ import { getList } from "../Redux/actions/listAction";
 import Cookies from "js-cookie";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Typography } from "@mui/material";
-import SearchIcon from "@material-ui/icons/Search";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 
@@ -90,6 +91,12 @@ const List = () => {
     sendFrom: "",
     sendTo: "",
   });
+
+  const [chip, setChip] = useState(["subject"]);
+  const handleDelete = (chipToDelete) => {
+    setChip((chip) => chip.filter((chips) => chips !== chipToDelete));
+  };
+
   const filterType = [
     {
       value: "subject",
@@ -127,7 +134,6 @@ const List = () => {
     }
   };
 
-
   const handleClick = (event) => {
     setFilteropen(event.currentTarget);
   };
@@ -139,6 +145,7 @@ const List = () => {
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setState({ ...state, [name]: value });
@@ -169,11 +176,66 @@ const List = () => {
         >
           Filter
         </Button>
+        {filterType.map((option) => (
+          <div className="chip">
+            {chip.map((chips) =>
+              value === "subject" ? (
+                <Chip
+                  key={chips}
+                  label={option.value}
+                  onDelete={() => handleDelete(chips)}
+                  onChange={handleInputChange}
+                  size="small"
+                  name="subject"
+                  value={subject}
+                  style={{
+                    marginLeft: ".5rem",
+                    marginTop: ".5rem",
+                    boxShadow: "none",
+                    position: "relative",
+                  }}
+                />
+              ) : value === "fileNO" ? (
+                <Chip
+                  key={chips}
+                  label={option.value}
+                  onDelete={() => handleDelete(chips)}
+                  onChange={handleInputChange}
+                  size="small"
+                  name="fileNO"
+                  value={fileNo}
+                  style={{
+                    marginLeft: ".5rem",
+                    marginTop: ".5rem",
+                    boxShadow: "none",
+                    position: "relative",
+                  }}
+                />
+              ) : value==="dateFrom" (
+                <Chip
+                  key={chips}
+                  label={option.value}
+                  onDelete={() => handleDelete(chips)}
+                  onChange={handleInputChange}
+                  size="small"
+                  name="dateFrom"
+                  value={dateFrom}
+                  style={{
+                    marginLeft: ".5rem",
+                    marginTop: ".5rem",
+                    boxShadow: "none",
+                    position: "relative",
+                  }}
+                />
+              )
+            )}
+          </div>
+        ))}
         <Dialog
           open={filtertopen}
           onClose={handleClose}
           width="fillwidth"
-          style={{ display: "flex", left: "-1.5rem", top: ".8rem" }}
+          style={{ display: "flex", left: "-1.5rem", top: "-2rem" }}
         >
           <TextField
             select
@@ -280,10 +342,10 @@ const List = () => {
                 margin: "1rem 0",
                 textTransform: "capitalize",
               }}
-              startIcon={<SearchIcon />}
+              startIcon={<AddCircleOutlineIcon />}
               type="submit"
             >
-              Serach
+              Add Filter
             </Button>
           </form>
         </Dialog>
@@ -329,9 +391,9 @@ const List = () => {
                 <TableCell align="center" className="table_col">
                   {item.status === 2 ? (
                     <ThumbDownIcon style={{ color: "rgb(230, 81, 71)" }} />
-                    ) : (
-                      <ThumbUpIcon style={{ color: "#009900" }} />
-                      )}
+                  ) : (
+                    <ThumbUpIcon style={{ color: "#009900" }} />
+                  )}
                 </TableCell>
               </ExpandableTableRow>
             ))}
