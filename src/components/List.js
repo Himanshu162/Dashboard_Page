@@ -179,8 +179,7 @@ const List = () => {
         {filterType.map((option) => (
           <div className="chip">
             {chip.map((chips) =>
-              value === "subject" ? (
-                <Chip
+                  <Chip
                   key={chips}
                   label={option.value}
                   onDelete={() => handleDelete(chips)}
@@ -195,39 +194,6 @@ const List = () => {
                     position: "relative",
                   }}
                 />
-              ) : value === "fileNO" ? (
-                <Chip
-                  key={chips}
-                  label={option.value}
-                  onDelete={() => handleDelete(chips)}
-                  onChange={handleInputChange}
-                  size="small"
-                  name="fileNO"
-                  value={fileNo}
-                  style={{
-                    marginLeft: ".5rem",
-                    marginTop: ".5rem",
-                    boxShadow: "none",
-                    position: "relative",
-                  }}
-                />
-              ) : value==="dateFrom" (
-                <Chip
-                  key={chips}
-                  label={option.value}
-                  onDelete={() => handleDelete(chips)}
-                  onChange={handleInputChange}
-                  size="small"
-                  name="dateFrom"
-                  value={dateFrom}
-                  style={{
-                    marginLeft: ".5rem",
-                    marginTop: ".5rem",
-                    boxShadow: "none",
-                    position: "relative",
-                  }}
-                />
-              )
             )}
           </div>
         ))}
