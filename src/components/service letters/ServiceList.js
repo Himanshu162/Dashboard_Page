@@ -15,9 +15,7 @@ import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import "../../Assets/CSS/List.css";
-import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import data from "../../data.json";
-import { useNavigate } from "react-router-dom";
 import TreeGraphStatus from "./TreeGraphStatus";
 
 const useStyles = makeStyles({
@@ -68,27 +66,12 @@ const ExpandableTableRow = ({
 };
 
 const ServiceList = () => {
-  let navigate = useNavigate();
   const classes = useStyles();
-  const HomePageNavigation = () => {
-    let path = "/";
-    navigate(path);
-  };
   return (
     <Paper
       className="filter_list"
       style={{ marginTop: "6rem", boxShadow: "none" }}
     >
-      <HomeOutlinedIcon
-        style={{
-          cursor: "pointer",
-          marginLeft: "20px",
-          top: "8rem",
-          color: "gray",
-        }}
-        onClick={HomePageNavigation}
-        className="homeIcon"
-      />
       <Typography variant="h4" className="heading_list">
         Service Letter Status
       </Typography>

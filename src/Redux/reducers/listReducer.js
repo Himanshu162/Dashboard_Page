@@ -19,9 +19,14 @@ const listReducer = (state = initialState, action) => {
         ...state,
         data: state.data.map((item) => {
           if (item.id === action.payload.id) {
-            return { ...item, steps: action.payload.data };
-          }else{
-            return item
+            return {
+              ...item,
+              steps: action.payload.data.sort((a, b) => {
+                return a.step - b.step;
+              }),
+            };
+          } else {
+            return item;
           }
         }),
       };

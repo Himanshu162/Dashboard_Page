@@ -49,31 +49,33 @@ const ProgressPage = ({ id, stepper }) => {
                           : item.status === 2
                           ? "#009900"
                           : "rgb(230, 81, 71)",
-                          color: "#fff",
+                      color: "#fff",
                     }}
                   >
-                    {item.status === 2 ? 
+                    {item.status === 2 ? (
                       ++j
-                     : item.status===1?++j:
+                    ) : item.status === 1 ? (
+                      ++j
+                    ) : (
                       <ErrorOutlineOutlinedIcon
                         style={{ height: "19px", paddingRight: "1.1px" }}
                       />
-                    }
+                    )}
                   </p>
 
                   {(i + 1) % 5 !== 0 && i + 1 !== stepper.length && (
                     <div
-                    style={{
-                      backgroundColor:
-                        item.status === 0
-                          ? "#fff"
-                          : item.status === 1
-                          ? "#c7c7c5"
-                          : item.status === 2
-                          ? "#009900"
-                          : "rgb(230, 81, 71)",
-                          color: "#fff",
-                    }}
+                      style={{
+                        backgroundColor:
+                          item.status === 0
+                            ? "#fff"
+                            : item.status === 1
+                            ? "#c7c7c5"
+                            : item.status === 2
+                            ? "#009900"
+                            : "rgb(230, 81, 71)",
+                        color: "#fff",
+                      }}
                     ></div>
                   )}
                 </div>

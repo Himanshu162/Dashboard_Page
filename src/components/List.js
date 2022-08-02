@@ -84,8 +84,8 @@ const List = () => {
 
   const [state, setState] = useState({
     subject: "",
-    dateFrom: "",
-    dateTo: "",
+    dateFrom: "20-jul-2022 10:00",
+    dateTo: "02-aug-2022 10:00",
     fileNo: "",
     sendFrom: "",
     sendTo: "",
