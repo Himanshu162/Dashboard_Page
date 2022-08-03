@@ -43,10 +43,19 @@
   background-color: rgb(243, 239, 239) !important;
 }
 
-.MuiChip-label{
+.MuiChip-label {
   text-shadow: none;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-weight: 300;
 }
 
+.e-headertext {
+  text-align: left !important;
+  text-shadow: none !important;
+  position: absolute !important;
+  font-size: 1rem;
+}
 
+span {
+  text-shadow: none !important;
+}

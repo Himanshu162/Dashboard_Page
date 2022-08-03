@@ -92,7 +92,7 @@ const List = () => {
     sendTo: "",
   });
 
-  const [chip, setChip] = useState(["subject"]);
+  const [chip, setChip] = useState([""]);
   const handleDelete = (chipToDelete) => {
     setChip((chip) => chip.filter((chips) => chips !== chipToDelete));
   };
@@ -178,23 +178,21 @@ const List = () => {
         </Button>
         {filterType.map((option) => (
           <div className="chip">
-            {chip.map((chips) =>
-                  <Chip
-                  key={chips}
-                  label={option.value}
-                  onDelete={() => handleDelete(chips)}
-                  onChange={handleInputChange}
-                  size="small"
-                  name="subject"
-                  value={subject}
-                  style={{
-                    marginLeft: ".5rem",
-                    marginTop: ".5rem",
-                    boxShadow: "none",
-                    position: "relative",
-                  }}
-                />
-            )}
+            {chip.map((chips) => (
+              <Chip
+                key={chips}
+                label={option.value}
+                onDelete={() => handleDelete(chips)}
+                onChange={handleInputChange}
+                size="small"
+                style={{
+                  marginLeft: ".5rem",
+                  marginTop: ".5rem",
+                  boxShadow: "none",
+                  position: "relative",
+                }}
+              />
+            ))}
           </div>
         ))}
         <Dialog
