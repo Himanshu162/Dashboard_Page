@@ -17,7 +17,7 @@
     "@syncfusion/ej2-buttons": "^20.2.38",
     "@syncfusion/ej2-react-documenteditor": "^20.2.40",
     "@syncfusion/ej2-react-filemanager": "^20.2.39",
-    "@syncfusion/ej2-react-grids": "^20.2.40",
+    "@syncfusion/ej2-react-grids": "^20.2.43",
     "@syncfusion/ej2-react-layouts": "^20.2.39",
     "@syncfusion/ej2-splitbuttons": "^20.2.38",
     "@testing-library/jest-dom": "^5.16.4",

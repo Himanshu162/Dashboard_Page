@@ -88,14 +88,26 @@ const List = () => {
     dateFrom: "20-jul-2022 10:00",
     dateTo: "02-aug-2022 10:00",
     fileNo: "",
-    sendFrom: "",
-    sendTo: "",
   });
 
-  const [chip, setChip] = useState([""]);
-  const handleDelete = (chipToDelete) => {
-    setChip((chip) => chip.filter((chips) => chips !== chipToDelete));
+  const [chip, setChip] = useState({
+    subject: "",
+    dateFrom: "20-jul-2022 10:00",
+    dateTo: "02-aug-2022 10:00",
+    fileNo: "",
+  });
+
+  console.log(chip);
+
+  const handleDelete = (value) => {
+    if (value === "subject") {
+      setChip({ ...chip, subject: "" });
+    } else if (value === "fileNo") {
+      setChip({ ...chip, fileNo: "" });
+    }
   };
+
+  console.log(chip);
 
   const filterType = [
     {
@@ -110,14 +122,6 @@ const List = () => {
       value: "date",
       label: "Date Range",
     },
-    {
-      value: "sendFrom",
-      label: "Send From",
-    },
-    {
-      value: "sendTo",
-      label: "Send To",
-    },
   ];
 
   useEffect(() => {
@@ -125,6 +129,7 @@ const List = () => {
   }, []);
 
   const loadTableData = () => {
+    setChip(state);
     if (status === "completed") {
       dispatch(getList("dashboard_service/api/getCompletedProcessList", state));
     } else if (status === "inProgress") {
@@ -156,6 +161,18 @@ const List = () => {
     loadTableData();
   };
 
+  const ChipTemplate = ({ value, onDelete }) => {
+    return (
+      <Chip
+        key={value}
+        label={value}
+        size="small"
+        onDelete={onDelete}
+        style={{ marginLeft: ".5rem" }}
+      />
+    );
+  };
+
   const { subject, dateFrom, dateTo, fileNo, sendFrom, sendTo } = state;
 
   return (
@@ -167,34 +184,33 @@ const List = () => {
         Personal Application Status
       </Typography>
       <div className="filter_list">
-        <Button
-          style={{ float: "left", textTransform: "capitalize" }}
-          color="primary"
-          variant="contained"
-          onClick={handleClick}
-          startIcon={<FilterListIcon />}
-        >
-          Filter
-        </Button>
-        {filterType.map((option) => (
-          <div className="chip">
-            {chip.map((chips) => (
-              <Chip
-                key={chips}
-                label={option.value}
-                onDelete={() => handleDelete(chips)}
-                onChange={handleInputChange}
-                size="small"
-                style={{
-                  marginLeft: ".5rem",
-                  marginTop: ".5rem",
-                  boxShadow: "none",
-                  position: "relative",
-                }}
-              />
-            ))}
-          </div>
-        ))}
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <Button
+            style={{ float: "left", textTransform: "capitalize" }}
+            color="primary"
+            variant="contained"
+            onClick={handleClick}
+            startIcon={<FilterListIcon />}
+          >
+            Filter
+          </Button>
+          {chip && (
+            <div className="chip">
+              {chip.subject && (
+                <ChipTemplate
+                  value={chip.subject}
+                  onDelete={() => handleDelete("subject")}
+                />
+              )}
+              {chip.fileNo && (
+                <ChipTemplate
+                  value={chip.fileNo}
+                  onDelete={() => handleDelete("fileNo")}
+                />
+              )}
+            </div>
+          )}
+        </div>
         <Dialog
           open={filtertopen}
           onClose={handleClose}
@@ -274,26 +290,6 @@ const List = () => {
                     />
                   </Grid>
                 </Grid>
-              ) : value === "sendFrom" ? (
-                <TextField
-                  label="By Username"
-                  variant="outlined"
-                  size="small"
-                  fullWidth
-                  onChange={handleInputChange}
-                  name="sendFrom"
-                  value={sendFrom}
-                />
-              ) : value === "sendTo" ? (
-                <TextField
-                  label="By Username"
-                  variant="outlined"
-                  size="small"
-                  fullWidth
-                  name="sendTo"
-                  value={sendTo}
-                  onChange={handleInputChange}
-                />
               ) : (
                 <></>
               )}
